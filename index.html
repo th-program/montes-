@@ -1,29 +1,155 @@
 <!DOCTYPE html>
-<html lang="PT-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>MENU PRINCIPAL</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Montes Developers | Guia de Sistemas</title>
+    <style>
+        /* Variáveis de cores baseadas no logo */
+        :root {
+            --bg-color: #0b0e14;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --primary-cyan: #00d2ff;
+            --primary-purple: #9d50bb;
+            --text-color: #ffffff;
+            --accent-gradient: linear-gradient(135deg, #00d2ff 0%, #9d50bb 100%);
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Efeito de fundo sutil */
+        body::before {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: var(--primary-cyan);
+            filter: blur(150px);
+            opacity: 0.15;
+            top: -50px;
+            left: -50px;
+            z-index: -1;
+        }
+
+        .container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+        }
+
+        .logo-area img {
+            width: 180px;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.3));
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            font-weight: 300;
+            font-size: 1rem;
+            color: #aaa;
+            margin-bottom: 3rem;
+        }
+
+        /* Substituindo a tabela por um layout moderno de cards */
+        .grid-sistemas {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-cyan);
+            box-shadow: 0 10px 30px rgba(0, 210, 255, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .icon {
+            font-size: 2.5rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card b {
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            color: #777;
+            border-left: 3px solid var(--primary-purple);
+            padding-left: 15px;
+            text-align: left;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 480px) {
+            .grid-sistemas { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
-    <center>
-            <h1>&#x1F6EC; Guia de Sistemas</h1>
-            <h2>Bem-vindo à Página Principal</h2>
 
-        <table border="3" cellspacing="5" cellpadding="18">
-            <tr>
-                <td>
-                    <a href="acesso.html" target="_blank"><b>&#x1F680 (Login/cadastro)</b></a>
-                </td>
-                <td>
-                    <a href="painel.html" target="_blank"><b>&#x1F4B0 (Acesso)</b></a>
-                </td>
-        </table>
+    <div class="container">
+        <div class="logo-area">
+            <img src="WhatsApp Image 2026-04-21 at 17.50.28.jpeg" alt="Montes Developers Logo">
+        </div>
 
-        <br>
-        
-        <p align="left">
-            <b>Clique nos links da tabela acima para navegar entre as os sistemas Montes.</b>
+        <h1>Guia de Sistemas</h1>
+        <h2>Bem-vindo à Central de Comando</h2>
+
+        <div class="grid-sistemas">
+            <a href="acesso.html" target="_blank" class="card">
+                <span class="icon">🚀</span>
+                <b>LOGIN / CADASTRO</b>
+            </a>
+
+            <a href="painel.html" target="_blank" class="card">
+                <span class="icon">💰</span>
+                <b>ACESSO FINANCEIRO</b>
+            </a>
+        </div>
+
+        <p class="footer-text">
+            <b>INFO:</b> Utilize os módulos acima para navegar entre os ecossistemas da <b>Montes Developers</b>.
         </p>
-    </center>
+    </div>
+
 </body>
 </html>
