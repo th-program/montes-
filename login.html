@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Mecânica Lima Car | Portal do Cliente</title>
+    <title>Mecânica Lima Car | Login</title>
     <style>
         :root { 
             --bg: #0f121e;
@@ -75,7 +75,6 @@
         .btn-main:hover { transform: translateY(-2px); opacity: 0.9; box-shadow: 0 8px 20px rgba(130, 56, 237, 0.4); }
 
         .toggle-mode { text-align: center; margin-top: 20px; font-size: 13px; color: var(--text-dim); }
-        .toggle-mode span { color: var(--primary); cursor: pointer; font-weight: bold; text-decoration: underline; }
 
         .btn-home-fixed {
             position: fixed; top: 20px; left: 20px; text-decoration: none; color: var(--text-dim);
@@ -331,31 +330,7 @@
         <button class="btn-main" onclick="processarAcesso()">ENTRAR NO SISTEMA</button>
 
         <div class="toggle-mode">
-            Ainda não tem conta? <span onclick="alternarModo('cadastro')">Se cadastrar</span>
-        </div>
-    </section>
-
-    <section id="view-cadastro" class="card hidden">
-        <h2 style="color:var(--primary); font-size:18px; text-align:center; margin-bottom:20px; letter-spacing: 1px;">CRIAR NOVA CONTA</h2>
-        
-        <label>Nome Completo</label>
-        <input type="text" id="c-nome" placeholder="Ex: João Silva">
-        
-        <label>WhatsApp (com DDD)</label>
-        <input type="tel" id="c-zap" placeholder="11999999999">
-
-        <label>E-mail</label>
-        <input type="email" id="c-email-cad" placeholder="exemplo@email.com">
-
-        <label>Sua Senha</label>
-        <input type="password" id="c-pass-cad" placeholder="••••••">
-        
-        <div class="aviso-senha">Protegemos seus dados com criptografia de ponta a ponta.</div>
-        
-        <button class="btn-main" onclick="processarAcesso()">CADASTRAR E CONTINUAR</button>
-
-        <div class="toggle-mode">
-            Já possui conta? <span onclick="alternarModo('login')">Fazer Login</span>
+            Ainda não tem conta? <a href="cadastro.html" style="color: var(--primary); cursor: pointer; font-weight: bold; text-decoration: underline;">Se cadastrar</a>
         </div>
     </section>
 
@@ -492,7 +467,6 @@
     const db = firebase.database();
 
     let dadosTemporariosCliente = {};
-    let modoAtual = 'login'; 
 
     function showAlert(msg, color = "#ef4444") {
         const div = document.getElementById('custom-alert');
@@ -513,76 +487,33 @@
         return partes[0] + ' ' + partes[partes.length - 1];
     }
 
-    function alternarModo(novoModo) {
-        modoAtual = novoModo;
-        if (novoModo === 'cadastro') {
-            document.getElementById('view-login').classList.add('hidden');
-            document.getElementById('view-cadastro').classList.remove('hidden');
-        } else {
-            document.getElementById('view-cadastro').classList.add('hidden');
-            document.getElementById('view-login').classList.remove('hidden');
-        }
-    }
-
     function processarAcesso() {
-        let email, pass;
-        
-        if (modoAtual === 'login') {
-            email = document.getElementById('c-email-login').value.trim().toLowerCase();
-            pass = document.getElementById('c-pass-login').value.trim();
-        } else {
-            email = document.getElementById('c-email-cad').value.trim().toLowerCase();
-            pass = document.getElementById('c-pass-cad').value.trim();
-        }
+        let email = document.getElementById('c-email-login').value.trim().toLowerCase();
+        let pass = document.getElementById('c-pass-login').value.trim();
 
         if(!email || !pass) return showAlert("AVISO: PREENCHA E-MAIL E SENHA", "#f59e0b");
         
         const emailChave = sanitizarEmail(email);
 
-        if (modoAtual === 'login') {
-            db.ref('usuarios/' + emailChave).once('value').then((snapshot) => {
-                if (snapshot.exists()) {
-                    const dados = snapshot.val();
-                    if(dados.senha === pass) {
-                        dadosTemporariosCliente = { nome: dados.nome, zap: dados.zap, user: emailChave, emailOriginal: dados.email };
-                        prepararDashboard();
-                    } else {
-                        showAlert("ERRO: SENHA INCORRETA");
-                    }
+        db.ref('usuarios/' + emailChave).once('value').then((snapshot) => {
+            if (snapshot.exists()) {
+                const dados = snapshot.val();
+                if(dados.senha === pass) {
+                    dadosTemporariosCliente = { nome: dados.nome, zap: dados.zap, user: emailChave, emailOriginal: dados.email };
+                    prepararDashboard();
                 } else {
-                    showAlert("ERRO: E-MAIL NÃO ENCONTRADO. CLIQUE EM SE CADASTRAR.");
+                    showAlert("ERRO: SENHA INCORRETA");
                 }
-            });
-        } else {
-            const nome = document.getElementById('c-nome').value.trim();
-            const zap = document.getElementById('c-zap').value.replace(/\D/g, "");
-
-            if(!nome || !zap) return showAlert("AVISO: PREENCHA TODOS OS CAMPOS PARA CADASTRO", "#f59e0b");
-
-            db.ref('usuarios/' + emailChave).once('value').then((snapshot) => {
-                if(snapshot.exists()) {
-                    showAlert("AVISO: ESTE E-MAIL JÁ POSSUI CADASTRO.", "#f59e0b");
-                } else {
-                    db.ref('usuarios/' + emailChave).set({
-                        nome: nome,
-                        zap: zap,
-                        senha: pass,
-                        email: email
-                    }).then(() => {
-                        dadosTemporariosCliente = { nome, zap, user: emailChave, emailOriginal: email };
-                        showAlert("SUCESSO: CONTA CRIADA!", "#10b981");
-                        setTimeout(prepararDashboard, 1000);
-                    });
-                }
-            });
-        }
+            } else {
+                showAlert("ERRO: E-MAIL NÃO ENCONTRADO. FAÇA SEU CADASTRO.");
+            }
+        });
     }
 
     function prepararDashboard() {
         document.getElementById('main-container').classList.add('wide');
         document.getElementById('caixa-logo').classList.add('hidden'); 
         document.getElementById('view-login').classList.add('hidden');
-        document.getElementById('view-cadastro').classList.add('hidden');
         document.getElementById('view-veiculo').classList.add('hidden');
         document.getElementById('view-dashboard').classList.remove('hidden');
         window.scrollTo(0,0);
@@ -798,11 +729,11 @@
 
     document.addEventListener('keydown', function(event) {
         if (event.key === 'Enter') {
-            const loginVisivel = !document.getElementById('view-login').classList.contains('hidden');
-            const cadastroVisivel = !document.getElementById('view-cadastro').classList.contains('hidden');
+            const loginEl = document.getElementById('view-login');
+            const loginVisivel = loginEl && !loginEl.classList.contains('hidden');
             const veiculoVisivel = !document.getElementById('view-veiculo').classList.contains('hidden');
 
-            if (loginVisivel || cadastroVisivel) {
+            if (loginVisivel) {
                 processarAcesso();
             } else if (veiculoVisivel) {
                 finalizarCadastro();
@@ -821,6 +752,5 @@
         }
     });
 </script>
-
 </body>
 </html>
