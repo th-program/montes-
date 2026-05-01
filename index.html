@@ -4,152 +4,242 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="logomontes.png">
-    <title>Montes Developers | Guia de Sistemas</title>
+    <title>Montes Developers | Painel Administrativo</title>
     <style>
-        /* Variáveis de cores baseadas no logo */
         :root {
             --bg-color: #0b0e14;
-            --card-bg: rgba(255, 255, 255, 0.05);
+            --line-bg: rgba(255, 255, 255, 0.03);
+            --line-hover: rgba(255, 255, 255, 0.08);
             --primary-cyan: #00d2ff;
             --primary-purple: #9d50bb;
             --text-color: #ffffff;
-            --accent-gradient: linear-gradient(135deg, #00d2ff 0%, #9d50bb 100%);
+            --text-muted: #888;
+            --accent-gradient: linear-gradient(90deg, #00d2ff 0%, #9d50bb 100%);
         }
 
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', Roboto, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start; /* Alinhado ao topo para permitir scroll se a lista crescer */
             min-height: 100vh;
-            overflow: hidden;
+            padding: 40px 0;
         }
 
-        /* Efeito de fundo sutil */
+        /* Fundo com gradiente suave */
         body::before {
             content: "";
-            position: absolute;
-            width: 300px;
-            height: 300px;
+            position: fixed;
+            width: 400px;
+            height: 400px;
             background: var(--primary-cyan);
-            filter: blur(150px);
-            opacity: 0.15;
-            top: -50px;
-            left: -50px;
+            filter: blur(180px);
+            opacity: 0.1;
+            top: -100px;
+            left: -100px;
             z-index: -1;
         }
 
         .container {
-            text-align: center;
-            padding: 2rem;
-            max-width: 600px;
             width: 90%;
+            max-width: 800px;
         }
 
-        .logo-area img {
-            width: 180px;
-            margin-bottom: 1rem;
-            filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.3));
+        .header {
+            text-align: left;
+            margin-bottom: 40px;
+            border-left: 4px solid var(--primary-cyan);
+            padding-left: 20px;
+        }
+
+        .logo-small {
+            width: 120px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 5px rgba(0, 210, 255, 0.2));
         }
 
         h1 {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-            letter-spacing: 2px;
+            font-size: 1.5rem;
+            margin: 0;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         h2 {
-            font-weight: 300;
-            font-size: 1rem;
-            color: #aaa;
-            margin-bottom: 3rem;
+            font-weight: 400;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 5px 0 0 0;
         }
 
-        /* Substituindo a tabela por um layout moderno de cards */
-        .grid-sistemas {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 2rem;
+        /* Estrutura de Grupos */
+        .secao-grupo {
+            margin-bottom: 30px;
         }
 
-        .card {
-            background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 25px;
-            border-radius: 15px;
-            text-decoration: none;
-            color: white;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
+        .titulo-grupo {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--primary-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .titulo-grupo::after {
+            content: "";
+            height: 1px;
+            flex-grow: 1;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Estilo em Linhas */
+        .lista-sistemas {
             display: flex;
             flex-direction: column;
+            gap: 8px;
+        }
+
+        .linha-item {
+            background: var(--line-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 15px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+        }
+
+        .linha-item:hover {
+            background: var(--line-hover);
+            border-color: var(--primary-purple);
+            transform: translateX(5px);
+        }
+
+        .info-esquerda {
+            display: flex;
             align-items: center;
             gap: 15px;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-cyan);
-            box-shadow: 0 10px 30px rgba(0, 210, 255, 0.2);
-            background: rgba(255, 255, 255, 0.08);
+        .icon-mini {
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
         }
 
-        .icon {
-            font-size: 2.5rem;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .label-sistema {
+            font-weight: 500;
+            font-size: 1rem;
         }
 
-        .card b {
-            font-size: 1.1rem;
-            letter-spacing: 1px;
+        .tag-status {
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
         }
 
-        .footer-text {
-            font-size: 0.9rem;
-            color: #777;
-            border-left: 3px solid var(--primary-purple);
-            padding-left: 15px;
-            text-align: left;
-            margin-top: 2rem;
+        .footer-info {
+            margin-top: 50px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
         }
 
-        @media (max-width: 480px) {
-            .grid-sistemas { grid-template-columns: 1fr; }
+        .footer-info b {
+            color: var(--primary-cyan);
+        }
+
+        /* Badge de "Em Breve" */
+        .breve {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <div class="logo-area">
-            <img src="logomontes.png" alt="Montes Developers Logo">
+        <header class="header">
+            <img src="logomontes.png" alt="Logo" class="logo-small">
+            <h1>Central de Sistemas</h1>
+            <h2>Ambiente de Testes & Administração Interna</h2>
+        </header>
+
+        <!-- GRUPO 1: AUTENTICAÇÃO -->
+        <div class="secao-grupo">
+            <div class="titulo-grupo">Sistemas de Login e Cadastro</div>
+            <div class="lista-sistemas">
+                <a href="login.html" class="linha-item">
+                    <div class="info-esquerda">
+                        <span class="icon-mini">🔑</span>
+                        <span class="label-sistema">Módulo de Login</span>
+                    </div>
+                    <span class="tag-status">Ativo</span>
+                </a>
+                <a href="cadastro.html" class="linha-item">
+                    <div class="info-esquerda">
+                        <span class="icon-mini">📝</span>
+                        <span class="label-sistema">Módulo de Cadastro</span>
+                    </div>
+                    <span class="tag-status">Sincronizado</span>
+                </a>
+            </div>
         </div>
 
-        <h1>Guia de Sistemas</h1>
-        <h2>Bem-vindo à Central de Comando</h2>
-
-        <div class="grid-sistemas">
-            <a href="acesso.html" target="_blank" class="card">
-                <span class="icon">🚀</span>
-                <b>LOGIN / CADASTRO</b>
-            </a>
-
-            <a href="painel.html" target="_blank" class="card">
-                <span class="icon">💰</span>
-                <b>ACESSO FINANCEIRO</b>
-            </a>
+        <!-- GRUPO 2: FINANCEIRO -->
+        <div class="secao-grupo">
+            <div class="titulo-grupo">Gestão e Financeiro</div>
+            <div class="lista-sistemas">
+                <a href="painel.html" class="linha-item">
+                    <div class="info-esquerda">
+                        <span class="icon-mini">💰</span>
+                        <span class="label-sistema">Acesso Financeiro</span>
+                    </div>
+                    <span class="tag-status">Restrito</span>
+                </a>
+            </div>
         </div>
 
-        <p class="footer-text">
-            <b>INFO:</b> Utilize os módulos acima para navegar entre os ecossistemas da <b>Montes Developers</b>.
-        </p>
+        <!-- GRUPO 3: FUTUROS PROJETOS -->
+        <div class="secao-grupo">
+            <div class="titulo-grupo">Novos Tópicos</div>
+            <div class="lista-sistemas">
+                <div class="linha-item breve">
+                    <div class="info-esquerda">
+                        <span class="icon-mini">🛠️</span>
+                        <span class="label-sistema">Gestão de Clientes</span>
+                    </div>
+                    <span class="tag-status">Em breve</span>
+                </div>
+                <div class="linha-item breve">
+                    <div class="info-esquerda">
+                        <span class="icon-mini">📊</span>
+                        <span class="label-sistema">Dashboard de Vendas</span>
+                    </div>
+                    <span class="tag-status">Em breve</span>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer-info">
+            <b>Nota Administrativa:</b> Este painel é de uso exclusivo para testes e navegação da <b>Montes Developers</b>. 
+            Todas as conexões são internas. Para novos módulos, adicione uma nova <code>div class="secao-grupo"</code> ao código.
+        </footer>
     </div>
 
 </body>
