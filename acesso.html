@@ -1,4 +1,3 @@
-login
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -7,17 +6,17 @@ login
     <title>Mecânica Lima Car | Portal do Cliente</title>
     <style>
         :root { 
-            --bg: #000814;
+            --bg: #0f121e;
             --card-bg: rgba(255, 255, 255, 0.03);
-            --primary: #d4af37; 
-            --primary-glow: rgba(212, 175, 55, 0.3);
+            --primary: #2eb4f0; 
+            --primary-glow: rgba(46, 180, 240, 0.3);
             --text-main: #f8f9fa; 
             --text-dim: #94a3b8;
-            --border: rgba(212, 175, 55, 0.15); 
+            --border: rgba(46, 180, 240, 0.15); 
             --success: #10b981; 
             --warning: #f59e0b;
             --danger: #ef4444; 
-            --input-bg: #001226; 
+            --input-bg: #141824; 
             --radius: 16px;
         } 
         
@@ -27,8 +26,8 @@ login
             font-family: 'Inter', 'Segoe UI', sans-serif;
             background-color: var(--bg); 
             background-image: 
-                radial-gradient(circle at 10% 10%, rgba(212, 175, 55, 0.03) 0%, transparent 30%),
-                radial-gradient(circle at 90% 90%, rgba(212, 175, 55, 0.03) 0%, transparent 30%);
+                radial-gradient(circle at 10% 10%, rgba(46, 180, 240, 0.03) 0%, transparent 30%),
+                radial-gradient(circle at 90% 90%, rgba(46, 180, 240, 0.03) 0%, transparent 30%);
             color: var(--text-main); 
             display: flex; flex-direction: column; min-height: 100vh; padding: 20px; align-items: center; justify-content: center;
         }
@@ -67,14 +66,14 @@ login
         input:disabled { opacity: 0.6; cursor: not-allowed; }
 
         .btn-main { 
-            background: linear-gradient(135deg, #d4af37 0%, #b8962d 100%); color: #000; 
+            background: linear-gradient(135deg, #2eb4f0 0%, #8238ed 100%); color: #fff; 
             width: 100%; padding: 16px; border: none; border-radius: 12px; font-weight: 800; 
             text-transform: uppercase; cursor: pointer; font-size: 13px; transition: 0.3s; 
-            box-shadow: 0 5px 15px rgba(184, 150, 45, 0.2);
+            box-shadow: 0 5px 15px rgba(130, 56, 237, 0.2);
             display: flex; align-items: center; justify-content: center; gap: 8px;
         }
 
-        .btn-main:hover { transform: translateY(-2px); opacity: 0.9; box-shadow: 0 8px 20px rgba(184, 150, 45, 0.4); }
+        .btn-main:hover { transform: translateY(-2px); opacity: 0.9; box-shadow: 0 8px 20px rgba(130, 56, 237, 0.4); }
 
         .toggle-mode { text-align: center; margin-top: 20px; font-size: 13px; color: var(--text-dim); }
         .toggle-mode span { color: var(--primary); cursor: pointer; font-weight: bold; text-decoration: underline; }
@@ -94,13 +93,13 @@ login
         }
 
         .aviso-senha {
-            background: rgba(212, 175, 55, 0.05); color: var(--text-dim); padding: 10px;
+            background: rgba(46, 180, 240, 0.05); color: var(--text-dim); padding: 10px;
             border-radius: 10px; font-size: 11px; margin-bottom: 15px;
             border: 1px dotted var(--border); text-align: center;
         }
         
         .instruction-box {
-            background: linear-gradient(to right, rgba(212, 175, 55, 0.1), transparent);
+            background: linear-gradient(to right, rgba(46, 180, 240, 0.1), transparent);
             border-left: 3px solid var(--primary);
             padding: 12px 15px;
             margin-bottom: 25px;
@@ -144,8 +143,8 @@ login
             width: 45px;
             height: 45px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #d4af37 0%, #b8962d 100%);
-            color: #000;
+            background: linear-gradient(135deg, #2eb4f0 0%, #8238ed 100%);
+            color: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -184,7 +183,7 @@ login
             font-size: 24px; padding: 8px; border-radius: 8px; cursor: pointer;
             display: flex; align-items: center; justify-content: center; transition: 0.3s;
         }
-        .btn-hamburguer:hover { background: rgba(212, 175, 55, 0.1); box-shadow: 0 0 10px var(--primary-glow); }
+        .btn-hamburguer:hover { background: rgba(46, 180, 240, 0.1); box-shadow: 0 0 10px var(--primary-glow); }
 
         .menu-nav { display: flex; flex-direction: column; gap: 8px; flex-grow: 1; }
         .svg-icon { width: 1.2em; height: 1.2em; fill: currentColor; flex-shrink: 0; }
@@ -196,7 +195,7 @@ login
             letter-spacing: 0.5px;
         }
         .btn-side:hover { background: rgba(255, 255, 255, 0.05); color: var(--text-main); }
-        .btn-side.active { background: rgba(212, 175, 55, 0.1); color: var(--primary); border-left: 4px solid var(--primary); }
+        .btn-side.active { background: rgba(46, 180, 240, 0.1); color: var(--primary); border-left: 4px solid var(--primary); }
         .btn-side.logout { margin-top: auto; color: var(--danger); }
         .btn-side.logout:hover { background: rgba(239, 68, 68, 0.1); }
 
@@ -271,7 +270,7 @@ login
         .v-fotos-galeria { display: flex; gap: 10px; padding: 15px 0 0; overflow-x: auto; }
         .v-fotos-galeria img { width: 80px; height: 80px; border-radius: 8px; object-fit: cover; border: 1px solid var(--border); cursor: pointer; }
 
-        .v-foto-placeholder { width: 140px; height: 140px; margin: 0 auto 0; background: rgba(212, 175, 55, 0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 14px; color: var(--text-dim); border: 1px dashed var(--border); font-weight: bold; letter-spacing: 1px; text-transform: uppercase;}
+        .v-foto-placeholder { width: 140px; height: 140px; margin: 0 auto 0; background: rgba(46, 180, 240, 0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 14px; color: var(--text-dim); border: 1px dashed var(--border); font-weight: bold; letter-spacing: 1px; text-transform: uppercase;}
 
         .v-info-box { background: rgba(0,0,0,0.3); padding: 15px; border-radius: 10px; margin-top: 15px;}
         .v-preco { font-size: 22px; font-weight: 900; color: var(--success); margin-bottom: 10px; display: block; }
@@ -281,7 +280,7 @@ login
         .status-badge { position: absolute; top: 20px; right: 20px; font-size: 12px; padding: 8px 16px; border-radius: 8px; font-weight: 800; text-transform: uppercase; z-index: 10; backdrop-filter: blur(5px);}
         .status-fila { background: rgba(245, 158, 11, 0.2); color: var(--warning); border: 1px solid var(--warning); }
         .status-oficina { background: rgba(16, 185, 129, 0.2); color: var(--success); border: 1px solid var(--success); }
-        .status-pronto { background: rgba(212, 175, 55, 0.2); color: var(--primary); border: 1px solid var(--primary); }
+        .status-pronto { background: rgba(46, 180, 240, 0.2); color: var(--primary); border: 1px solid var(--primary); }
 
         .box-placeholder {
             text-align:center; padding: 40px; border: 1px dashed var(--border); 
@@ -320,7 +319,7 @@ login
 </div>
 
 <div class="container" id="main-container">
-    <div class="logo-box" id="caixa-logo"><img src="logo.jpg" class="logo-img" alt="Logo"></div>
+    <div class="logo-box" id="caixa-logo"><img src="30373.jpg" class="logo-img" alt="Logo"></div>
 
     <section id="view-login" class="card">
         <h2 id="titulo-acesso" style="color:var(--primary); font-size:18px; text-align:center; margin-bottom:20px; letter-spacing: 1px;">FAÇA LOGIN</h2>
