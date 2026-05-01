@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Técnico - Lima Car</title>
+    <style>
+        /* (Estilos simplificados para o exemplo, use o CSS do seu arquivo original aqui) */
+        :root { --bg: #0a0e17; --primary: #29b6f6; --border: rgba(41, 182, 246, 0.15); --text-main: #fff; }
+        body { font-family: sans-serif; background: var(--bg); color: #fff; padding: 20px; }
+        .card { background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 20px; border-radius: 16px; }
+        .painel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .painel-grid { grid-template-columns: 1fr; } }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        td { padding: 12px; border-bottom: 1px solid var(--border); }
+        .btn-main { background: var(--primary); border: none; padding: 10px; color: #fff; border-radius: 8px; cursor: pointer; width: 100%; }
+        input, textarea { width: 100%; padding: 10px; margin-bottom: 10px; background: #111; border: 1px solid var(--border); color: #fff; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2 style="color:var(--primary); margin-bottom: 20px;">🛠️ PAINEL DE CONTROLE TÉCNICO</h2>
+    
+    <div class="painel-grid">
+        <div class="painel-col">
+            <h3>Veículos no Pátio</h3>
+            <table id="corpo-tabela"></table>
+            <button class="btn-main" style="margin-top:20px; background: #ef4444;" onclick="confirmarLimpezaGeral()">LIMPAR PÁTIO</button>
+        </div>
+
+        <div class="painel-col" id="coluna-formulario">
+            <h3>Gerenciar Veículo</h3>
+            <label>Placa</label>
+            <input type="text" id="m-placa" placeholder="PLACA">
+            <label>Modelo</label>
+            <input type="text" id="m-modelo" placeholder="Ex: Honda Civic">
+            <label>Valor (R$)</label>
+            <input type="text" id="m-preco" placeholder="0,00">
+            <label>Observações Técnicas</label>
+            <textarea id="m-obs" rows="4"></textarea>
+            
+            <button class="btn-main" onclick="salvar()">✅ SALVAR ALTERAÇÕES</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database-compat.js"></script>
+<script>
+    // [COLE SEU CONFIG DO FIREBASE AQUI]
+    const firebaseConfig = { /* ... */ };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    // Listeners do Banco
+    db.ref('veiculos').on('value', snap => { 
+        const dados = snap.val() || {};
+        const corpo = document.getElementById('corpo-tabela');
+        corpo.innerHTML = "";
+        Object.keys(dados).forEach(p => {
+            corpo.innerHTML += `
+                <tr>
+                    <td><b>${p}</b><br>${dados[p].modelo}</td>
+                    <td>${dados[p].status}</td>
+                    <td><button onclick="prepararEdicao('${p}')">✏️</button></td>
+                </tr>`;
+        });
+    });
+
+    function prepararEdicao(p) {
+        db.ref('veiculos/' + p).once('value', s => {
+            const v = s.val();
+            document.getElementById('m-placa').value = p;
+            document.getElementById('m-modelo').value = v.modelo;
+            document.getElementById('m-preco').value = v.preco;
+            document.getElementById('m-obs').value = v.obs;
+        });
+    }
+
+    function salvar() {
+        const placa = document.getElementById('m-placa').value.toUpperCase();
+        const dados = {
+            modelo: document.getElementById('m-modelo').value,
+            preco: document.getElementById('m-preco').value,
+            obs: document.getElementById('m-obs').value,
+            status: "Trabalhando" // Exemplo
+        };
+        db.ref('veiculos/' + placa).update(dados).then(() => alert("Atualizado!"));
+    }
+</script>
+</body>
+</html>
