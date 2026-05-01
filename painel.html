@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta id="viewport-meta" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Mecânica Lima Car | Gestão Profissional</title>
+    <title>Mecânica Lima Car | Central do Proprietário</title>
     <style>
         :root { 
             --bg: #000814;
@@ -38,8 +38,8 @@
         }
 
         @keyframes slideIn {
-            from { opacity: 0; transform: translateX(30px); }
-            to { opacity: 1; transform: translateX(0); }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .animar-entrada {
@@ -100,7 +100,9 @@
         
         .btn-upload-custom { display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(212, 175, 55, 0.05); border: 2px dashed var(--border); color: var(--primary); padding: 25px 15px; border-radius: var(--radius); cursor: pointer; margin-bottom: 20px; font-weight: 600; font-size: 12px; transition: 0.3s; width: 100%; } 
         .input-placa-grande { font-family: 'Monaco', monospace; font-size: 32px !important; background: linear-gradient(to bottom, #fff, #cbd5e1) !important; color: #0f172a !important; border: none !important; text-transform: uppercase; letter-spacing: 4px; text-align: center; border-radius: 12px !important; font-weight: 900; } 
+        
         .btn-main { background: linear-gradient(135deg, #d4af37 0%, #b8962d 100%); color: #000; width: 100%; padding: 16px; border: none; border-radius: 12px; font-weight: 800; text-transform: uppercase; cursor: pointer; font-size: 13px; transition: 0.3s; box-shadow: 0 5px 15px rgba(184, 150, 45, 0.2); margin-top: 5px; display: block; text-decoration: none; text-align: center; } 
+        .btn-main:active { transform: scale(0.98); }
 
         .categorias-filtro { display: flex; gap: 8px; margin-top: 10px; overflow-x: auto; padding-bottom: 12px; width: 100%; scrollbar-width: none; } 
         .cat-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--text-dim); padding: 10px 16px; border-radius: 100px; font-size: 11px; font-weight: 600; cursor: pointer; white-space: nowrap; } 
@@ -119,7 +121,7 @@
         #modal-view { max-width: 95%; max-height: 80%; border: 1px solid var(--primary); border-radius: 10px; } 
 
         .fotos-grid { display: grid; gap: 8px; margin-top: 15px; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); } 
-        .img-item { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; border: 1px solid var(--border); } 
+        .img-item { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; border: 1px solid var(--border); cursor: zoom-in;} 
 
         .confirm-box { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 10001; backdrop-filter: blur(8px); }
         .confirm-box .card { background: #070b14; border: 1px solid var(--border); padding: 30px; border-radius: 20px; border-top: 4px solid var(--danger); max-width: 320px; text-align: center;}
@@ -141,16 +143,65 @@
         
         .whatsapp-float-btn { background: #128c7e !important; color: white !important; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 20px; border: none; padding: 14px; }
         .tag-servico { font-size: 10px; background: rgba(255,255,255,0.05); padding: 6px 12px; border-radius: 100px; cursor: pointer; border: 1px solid var(--border); color: var(--text-dim); font-weight: 600; }
-        #custom-alert { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 30000; padding: 15px 20px; border-radius: 10px; background: #1e293b; color: white; border-left: 4px solid var(--primary); font-size: 13px; font-weight: 600; display: none; box-shadow: 0 10px 30px rgba(0,0,0,0.5); width: 85%; text-align: center; }
+        #custom-alert { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 30000; padding: 15px 20px; border-radius: 10px; background: #1e293b; color: white; border-left: 4px solid var(--primary); font-size: 13px; font-weight: 600; display: none; box-shadow: 0 10px 30px rgba(0,0,0,0.5); width: 85%; max-width: 400px; text-align: center; }
         
         .btn-danger-outline { background: none; border: 1px solid var(--danger); color: var(--danger); padding: 12px; border-radius: 12px; font-weight: 800; font-size: 11px; cursor: pointer; width: 100%; margin-top: 15px; transition: 0.3s; }
         .btn-danger-outline:hover { background: var(--danger); color: white; }
+
+        /* NOVAS CLASSES PARA O PAINEL DO CLIENTE */
+        .painel-proprietario {
+            margin-top:20px; background:var(--card-bg); padding:20px; 
+            border-radius:16px; border:1px solid var(--border); 
+            animation: slideIn 0.4s ease;
+        }
+        .header-veiculo {
+            display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;
+        }
+        .header-veiculo h3 { color:var(--primary); text-transform:uppercase; font-size:18px; margin:0;}
+        .placa-badge-cliente {
+            background:var(--input-bg); padding:6px 12px; border-radius:8px; 
+            font-family:'Monaco', monospace; color:var(--text-main); 
+            border:1px solid var(--border); font-weight: bold; letter-spacing: 1px;
+        }
+        .progress-labels {
+            display:flex; justify-content:space-between; font-size:10px; 
+            font-weight:800; margin-bottom:8px; text-transform:uppercase;
+        }
+        .progress-track {
+            width:100%; height:10px; background:rgba(255,255,255,0.05); 
+            border-radius:10px; overflow:hidden; border: 1px solid rgba(255,255,255,0.05);
+        }
+        .progress-fill {
+            height:100%; transition:width 1s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.5s ease;
+        }
+        .grid-info-cliente {
+            display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top:25px; margin-bottom:25px;
+        }
+        .box-info {
+            background:rgba(0,0,0,0.3); padding:16px; border-radius:12px; 
+            border:1px solid var(--border); text-align:center;
+            display: flex; flex-direction: column; justify-content: center;
+        }
+        .box-info small { color:var(--text-dim); font-size:10px; font-weight: 700; text-transform:uppercase; margin-bottom:6px; }
+        .checklist-item {
+            display:flex; align-items:center; gap:10px; margin-bottom:8px; 
+            font-size:13px; background:rgba(255,255,255,0.02); padding:12px; 
+            border-radius:8px; border:1px solid rgba(255,255,255,0.05);
+            color: #cbd5e1; font-weight: 500;
+        }
+        .btn-aprovar {
+            background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+            color: #fff; box-shadow: 0 5px 20px rgba(16, 185, 129, 0.2);
+        }
+        .btn-outline-cliente {
+            background: transparent; border: 1px solid var(--border); color: var(--text-main);
+        }
     </style>
 </head>
 <body>
 
-<a href="index.html" class="btn-home-fixed" 
-    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg> 
+<a href="index.html" class="btn-home-fixed">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg> 
     INÍCIO
 </a>
 <div id="custom-alert"></div>
@@ -166,7 +217,8 @@
 
 <div class="container">
     <section id="view-cliente" class="card">
-        <div class="logo-box"><img src="logo.jpg" class="logo-img"></div>
+        <div class="logo-box"><img src="logo.jpg" class="logo-img" alt="Lima Car Logo"></div>
+        
         <div id="area-busca">
             <label>E-mail de Cadastro</label>
             <input type="email" id="login-user" placeholder="exemplo@email.com" oninput="verificarUsuarioMecanico(this.value)">
@@ -179,7 +231,7 @@
                 <input type="text" id="login-placa" class="input-placa-grande" maxlength="7" placeholder="ABC1D23">
             </div>
             
-            <button class="btn-main" onclick="gerenciarLogin()">ACESSAR PAINEL</button>
+            <button class="btn-main" onclick="gerenciarLogin()">ACESSAR SISTEMA</button>
         </div>
         <div id="resultado-cliente"></div>
     </section>
@@ -187,7 +239,7 @@
     <section id="view-painel" class="card hidden">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:25px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">
             <h2 style="font-size:14px; color:var(--primary); font-weight:800;">PAINEL TÉCNICO</h2>
-            <button onclick="fazerSair()" style="color:var(--danger); background:none; border:1px solid var(--danger); padding:6px 12px; border-radius:8px; font-size:10px; cursor:pointer;">SAIR</button>
+            <button onclick="fazerSair()" style="color:var(--danger); background:none; border:1px solid var(--danger); padding:6px 12px; border-radius:8px; font-size:10px; cursor:pointer; font-weight:bold;">SAIR</button>
         </div>
 
         <div class="painel-grid">
@@ -254,12 +306,14 @@
 
                     <label>Serviços Rápidos</label>
                     <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px;">
-                        <span class="tag-servico" onclick="addServico('Revisão')">+ Revisão</span>
-                        <span class="tag-servico" onclick="addServico('Óleo')">+ Óleo</span>
-                        <span class="tag-servico" onclick="addServico('Scanner')">+ Scanner</span>
+                        <span class="tag-servico" onclick="addServico('Revisão Geral')">+ Revisão</span>
+                        <span class="tag-servico" onclick="addServico('Troca de Óleo e Filtros')">+ Óleo</span>
+                        <span class="tag-servico" onclick="addServico('Diagnóstico via Scanner')">+ Scanner</span>
+                        <span class="tag-servico" onclick="addServico('Verificação de Freios')">+ Freios</span>
+                        <span class="tag-servico" onclick="addServico('Suspensão')">+ Suspensão</span>
                     </div>
           
-                    <textarea id="m-obs" rows="4" placeholder="Detalhes técnicos..."></textarea>
+                    <textarea id="m-obs" rows="4" placeholder="Detalhes técnicos (separe por | para criar itens no checklist do cliente)..."></textarea>
                     
                     <button class="btn-main" onclick="salvar()">✅ SALVAR REGISTRO</button>
                     <button class="btn-main" onclick="limparFormulario()" style="background:#111; color:#94a3b8; margin-top:10px">CANCELAR</button>
@@ -267,6 +321,10 @@
             </div>
         </div>
     </section>
+</div>
+
+<div id="img-modal" onclick="this.style.display='none'">
+    <img id="modal-view">
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
@@ -282,6 +340,7 @@
 
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
+    
     const LOGIN_ADM = "adm.limacar";
     const SENHA_ADM = "1234";
     const WHATSAPP_MECANICA = "5511999999999"; 
@@ -291,7 +350,6 @@
     let nomeClienteAtual = ""; let relatoClienteAtual = "";
     let acaoConfirmacao = null; 
 
-    // Função de sanitização (IGUAL ao seu arquivo de login)
     function sanitizarEmail(email) {
         return email.toLowerCase().trim().replace(/\./g, '_').replace(/@/g, '_at_');
     }
@@ -303,7 +361,6 @@
     function verificarUsuarioMecanico(valor) {
         const wrapperPlaca = document.getElementById('wrapper-placa');
         const loginLimpo = valor.trim().toLowerCase();
-        // Se não for o admin, precisa mostrar o campo da placa
         if (loginLimpo === LOGIN_ADM || loginLimpo === "") {
             wrapperPlaca.classList.add('hidden');
         } else {
@@ -332,35 +389,100 @@
 
         const emailChave = sanitizarEmail(emailDigitado);
         
-        // 1. Busca o veículo pela placa
         db.ref('veiculos/' + placaDigitada).once('value', (snapVeiculo) => {
             const v = snapVeiculo.val();
             
-            // 2. Verifica se o veículo pertence a este e-mail
             if(v && v.identificacao === emailChave) {
-                
-                // 3. Verifica se a senha do usuário está correta na tabela de usuários
                 db.ref('usuarios/' + emailChave).once('value', (snapUser) => {
                     const dadosUsuario = snapUser.val();
                     
                     if(dadosUsuario && dadosUsuario.senha === senhaDigitada) {
-                         // LOGIN SUCESSO - MOSTRA STATUS
-                         res.innerHTML = `
-                            <div style="margin-top:20px; background:rgba(255,255,255,0.05); padding:20px; border-radius:16px; border:1px solid var(--border); animation: slideIn 0.3s ease;">
-                                <h3 style="color:var(--primary); text-transform:uppercase;">${v.modelo || 'Veículo'}</h3>
-                                <p style="margin: 10px 0; font-size:12px;">Status Atual: <b style="color:var(--primary); font-size:16px;">${v.status}</b></p>
-                                <div style="margin:15px 0; color:#cbd5e1; font-size:13px; line-height:1.5; background:rgba(0,0,0,0.2); padding:10px; border-radius:8px;">
-                                    <b>Nota Técnica:</b><br>${v.obs || 'Analisando veículo...'}
-                                </div>
-                                ${v.fotos ? `<div class="fotos-grid" style="margin-bottom:15px">${v.fotos.map(f => `<img src="${f}" class="img-item" onclick="zoomImg('${f}')">`).join('')}</div>` : ''}
-                                <div style="text-align:center">
-                                    <small style="display:block; margin-bottom:5px; color:var(--text-dim)">Valor Previsto</small>
-                                    <p style="color:var(--success); font-weight:900; font-size:28px">R$ ${v.preco || '0,00'}</p>
-                                </div>
-                                <a href="https://wa.me/${WHATSAPP_MECANICA}?text=Olá,%20sou%20${dadosUsuario.nome}%20e%20quero%20saber%20mais%20sobre%20meu%20carro%20(Placa%20${placaDigitada})" target="_blank" class="btn-main whatsapp-float-btn" style="margin-top:20px; text-decoration:none; justify-content:center;">💬 FALAR COM O MECÂNICO</a>
-                            </div>
-                            <button onclick="location.reload()" class="btn-main" style="background:none; border:1px solid #333; color:#fff; margin-top:15px">SAIR DO PAINEL</button>`;
                         document.getElementById('area-busca').classList.add('hidden');
+                        
+                        // LÓGICA DA BARRA DE PROGRESSO
+                        let percentual = 33;
+                        let corProgress = "var(--warning)";
+                        if(v.status === 'Trabalhando') { percentual = 66; corProgress = "#3b82f6"; } // Azul
+                        if(v.status === 'Pronto') { percentual = 100; corProgress = "var(--success)"; }
+                        
+                        // LÓGICA DA PRÓXIMA REVISÃO (MOCKUP ESTÁTICO)
+                        let hoje = new Date();
+                        hoje.setMonth(hoje.getMonth() + 6);
+                        let dataProximaRevisao = hoje.toLocaleDateString('pt-BR');
+
+                        // LÓGICA DO CHECKLIST (Lê o v.obs e quebra nos pipes "|")
+                        let checklistHTML = "";
+                        if(v.obs && v.obs.trim() !== "") {
+                            let itens = v.obs.split('|');
+                            checklistHTML = itens.map(item => `
+                                <div class="checklist-item">
+                                    <span style="color:var(--primary); font-size:16px;">✔️</span> 
+                                    <span>${item.trim()}</span>
+                                </div>
+                            `).join('');
+                        } else {
+                            checklistHTML = `<div class="checklist-item" style="color:var(--text-dim);">Analisando o veículo e diagnosticando necessidades...</div>`;
+                        }
+
+                        // LÓGICA DE FOTOS
+                        let galeriaHTML = "";
+                        if(v.fotos) {
+                            galeriaHTML = `
+                                <label style="margin-top:20px;">Evidências do Serviço</label>
+                                <div class="fotos-grid" style="margin-top:5px; margin-bottom:25px;">
+                                    ${v.fotos.map(f => `<img src="${f}" class="img-item" onclick="zoomImg('${f}')">`).join('')}
+                                </div>`;
+                        }
+
+                        // INJETANDO O NOVO HTML DA CENTRAL DO PROPRIETÁRIO
+                        res.innerHTML = `
+                            <div class="painel-proprietario">
+                                <div class="header-veiculo">
+                                    <h3>${v.modelo || 'Veículo Cadastrado'}</h3>
+                                    <span class="placa-badge-cliente">${placaDigitada}</span>
+                                </div>
+
+                                <div style="margin-bottom: 10px;">
+                                    <div class="progress-labels">
+                                        <span style="color:${percentual >= 33 ? corProgress : 'var(--text-dim)'}">Na Fila</span>
+                                        <span style="color:${percentual >= 66 ? corProgress : 'var(--text-dim)'}">Em Manutenção</span>
+                                        <span style="color:${percentual === 100 ? corProgress : 'var(--text-dim)'}">Pronto</span>
+                                    </div>
+                                    <div class="progress-track">
+                                        <div class="progress-fill" style="width: ${percentual}%; background-color: ${corProgress};"></div>
+                                    </div>
+                                </div>
+
+                                <div class="grid-info-cliente">
+                                    <div class="box-info">
+                                        <small>Investimento Previsto</small>
+                                        <b style="color:var(--success); font-size:20px; font-weight:900;">R$ ${v.preco || '0,00'}</b>
+                                    </div>
+                                    <div class="box-info">
+                                        <small>Próxima Revisão</small>
+                                        <b style="color:var(--primary); font-size:15px;">${dataProximaRevisao}</b>
+                                    </div>
+                                </div>
+
+                                <label>Checklist de Manutenção</label>
+                                ${checklistHTML}
+
+                                ${galeriaHTML}
+
+                                <div style="display:flex; flex-direction:column; gap:12px; margin-top:10px;">
+                                    <a href="https://wa.me/${WHATSAPP_MECANICA}?text=Olá,%20sou%20${dadosUsuario.nome}%20e%20*APROVO*%20o%20orçamento%20de%20R$%20${v.preco}%20para%20a%20placa%20${placaDigitada}." target="_blank" class="btn-main btn-aprovar">
+                                        ✅ APROVAR ORÇAMENTO
+                                    </a>
+                                    
+                                    <a href="https://wa.me/${WHATSAPP_MECANICA}?text=Olá,%20sou%20${dadosUsuario.nome}%20e%20gostaria%20de%20tirar%20uma%20dúvida%20sobre%20meu%20veículo%20(Placa%20${placaDigitada})" target="_blank" class="btn-main btn-outline-cliente">
+                                        💬 FALAR COM MECÂNICO
+                                    </a>
+                                    
+                                    <button onclick="location.reload()" class="btn-main" style="background:transparent; border:none; color:var(--text-dim); box-shadow:none; font-size:11px; margin-top:0;">
+                                        Sair da Central
+                                    </button>
+                                </div>
+                            </div>`;
                     } else {
                         showAlert("❌ SENHA INCORRETA");
                     }
@@ -371,7 +493,7 @@
         });
     }
 
-    // --- RESTANTE DO CÓDIGO DO PAINEL TÉCNICO (MANTIDO CONFORME ORIGINAL) ---
+    // --- FUNÇÕES DE ADMINISTRAÇÃO E LÓGICA (MANTIDAS) ---
     db.ref('veiculos').on('value', snap => { bancoDados = snap.val() || {}; desenharTabela(); });
     db.ref('servicos_ativos').on('value', snap => { bancoSolicitacoes = snap.val() || {}; desenharSolicitacoes(); });
 
@@ -532,7 +654,7 @@
         fotosBase64.forEach((src, idx) => {
             area.innerHTML += `
                 <div style="position:relative">
-                    <img src="${src}" class="img-item" onclick="zoomImg('${src}')" style="cursor:zoom-in">
+                    <img src="${src}" class="img-item" onclick="zoomImg('${src}')">
                     <button onclick="event.stopPropagation(); fotosBase64.splice(${idx},1); renderizarFotosEdicao()" 
                         style="position:absolute; top:-5px; right:-5px; background:var(--danger); color:white; border:none; border-radius:50%; width:22px; height:22px; cursor:pointer; font-weight:bold;">×</button>
                 </div>`;
@@ -615,34 +737,24 @@
 
     document.getElementById('btn-confirm-sim').onclick = () => { if(acaoConfirmacao) acaoConfirmacao(); };
 
-    // --- CORREÇÃO: ADICIONANDO SUPORTE A TECLAS ENTER E ESC ---
     document.addEventListener('keydown', function(event) {
         if (event.key === 'Enter') {
-            // Se estiver na tela de login
             if (!document.getElementById('view-cliente').classList.contains('hidden')) {
                 gerenciarLogin();
-            }
-            // Se o formulário técnico estiver aberto
-            else if (!document.getElementById('coluna-formulario').classList.contains('hidden')) {
+            } else if (!document.getElementById('coluna-formulario').classList.contains('hidden')) {
                 salvar();
             }
-            // Se houver uma caixa de confirmação aberta
             if (document.getElementById('confirm-box').style.display === 'flex') {
                 if(acaoConfirmacao) acaoConfirmacao();
             }
         }
         
         if (event.key === 'Escape') {
-            // Fecha o modal de imagem primeiro
             if (document.getElementById('img-modal').style.display === 'flex') {
                 document.getElementById('img-modal').style.display = 'none';
-            }
-            // Fecha caixa de confirmação
-            else if (document.getElementById('confirm-box').style.display === 'flex') {
+            } else if (document.getElementById('confirm-box').style.display === 'flex') {
                 fecharConfirm();
-            }
-            // Cancela edição/formulário se estiver aberto
-            else if (!document.getElementById('coluna-formulario').classList.contains('hidden')) {
+            } else if (!document.getElementById('coluna-formulario').classList.contains('hidden')) {
                 limparFormulario();
             }
         }
