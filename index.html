@@ -123,11 +123,32 @@
         }
 
 .btn {
-        padding: 0.8rem 1rem; /* Reduz o preenchimento lateral */
-        font-size: 0.9rem;      /* Diminui levemente a fonte para caber em uma linha */
-        width: 100%;           /* Faz o botão ocupar a largura disponível */
-        max-width: 280px;      /* Impede que ele fique largo demais em celulares grandes */
+    display: inline-block;     /* Garante que o link se comporte como um botão real */
+    max-width: 100%;           /* Impede que o botão ultrapasse a largura da tela */
+    background-color: transparent;
+    border: 2px solid var(--primary-cyan);
+    color: var(--primary-cyan);
+    
+    /* Ajuste de padding: menor nas laterais para telas pequenas */
+    padding: 0.8rem 1.2rem;    
+    
+    border-radius: 5px;
+    font-size: 0.9rem;         /* Tamanho de fonte ideal para frases longas */
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin-top: 1rem;
+    text-align: center;
+    box-sizing: border-box;    /* Garante que as bordas e padding não aumentem o tamanho total */
+}
+@media (min-width: 768px) {
+    .btn {
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
     }
+}
 
         .btn:hover {
             background-color: var(--primary-cyan);
