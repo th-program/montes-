@@ -104,7 +104,7 @@
         section.hero-banner {
             margin-top: 72px;
             padding: 0;
-            width: 98%;
+            width: 100%; /* Corrigido para ocupar a tela inteira */
             position: relative;
             display: flex;
             flex-direction: column;
@@ -112,16 +112,15 @@
         }
 
         .hero-img {
-            width: 95%;
-            max-width: 1400px; /* Evita esticar demais em monitores ultrawide */
-            margin: 0 auto; /* Centraliza a imagem no PC */
+            width: 100%; /* Corrigido para 100% da largura */
+            max-width: 100%; /* Removido o limite de 1400px para fluir em monitores grandes */
+            margin: 0 auto; 
             height: auto; /* Mantém a proporção real sem cortar */
             display: block;
-            /* object-fit: cover removido para evitar o corte no PC */
         }
 
         .hero-overlay {
-            width: 98%;
+            width: 100%; /* Corrigido para acompanhar a seção */
             padding: 2rem 0;
             display: flex;
             justify-content: center;
@@ -334,12 +333,11 @@
         }
 
         .attendant-card:hover {
-            border-color: #25D366; /* Verde WhatsApp */
+            border-color: #25D366; 
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(37, 211, 102, 0.1);
         }
 
-        /* Aqui você colocará as imagens de avatar depois */
         .avatar-placeholder {
             width: 90px;
             height: 90px;
@@ -351,13 +349,6 @@
             align-items: center;
             justify-content: center;
             font-size: 2rem;
-            /* Instrução de como colocar a imagem no futuro:
-               Remova o background e o border dashed acima, e insira:
-               background-image: url('sua-imagem-sem-fundo.png');
-               background-size: cover;
-               background-position: center;
-               border: 2px solid var(--primary-cyan);
-            */
         }
 
         .attendant-card h3 {
@@ -385,14 +376,14 @@
             font-size: 0.9rem;
             border: none;
             box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-            animation: bounce 2s infinite; /* Chamada da animação */
+            animation: bounce 2s infinite; 
             transition: all 0.3s ease;
         }
 
         .btn-whatsapp:hover {
             background-color: #128C7E;
             box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
-            animation: none; /* Pausa o pulo ao focar com o mouse */
+            animation: none; 
             transform: scale(1.05);
         }
 
