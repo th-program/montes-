@@ -95,35 +95,29 @@ nav ul li a:hover {
     color: var(--primary-cyan);
 }
 
-/* --- SEÇÃO HERO CORRIGIDA --- */
+/* No CSS geral */
 .hero-banner {
     margin-top: 70px;
     width: 100%;
     position: relative;
-    background-color: var(--bg-dark);
-    text-align: center;
     display: flex;
     flex-direction: column;
 }
 
-.hero-banner img {
+.hero-img {
     width: 100%;
-    height: auto; /* Mantém a proporção original no mobile */
-    max-height: 700px; /* Limite para telas ultra-wide */
-    object-fit: contain; /* Garante que a imagem inteira apareça */
+    height: auto; /* Mantém a proporção da imagem escolhida */
     display: block;
 }
 
-.hero-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 4rem 5% 2rem;
-    background: linear-gradient(to top, var(--bg-dark) 20%, transparent 100%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+/* No seu @media (max-width: 768px) */
+@media (max-width: 768px) {
+    .hero-overlay {
+        position: relative; /* Solta o botão de cima da imagem no celular */
+        background: var(--bg-dark); /* Fundo sólido para o botão não brigar com a imagem */
+        padding: 1.5rem 0;
+        margin-top: -5px; /* Remove qualquer fresta entre imagem e botão */
+    }
 }
 
 .btn {
@@ -355,12 +349,16 @@ footer {
     </header>
 
     <section id="inicio" class="hero-banner">
-        <img src="pe.jpeg" alt="Montes Developers Divulgação">
+    <picture>
+        <source srcset="pe-mobile.jpeg" media="(max-width: 768px)">
         
-        <div class="hero-overlay">
-            <a href="#sistemas" class="btn btn-solid">Conhecer Sistemas</a>
-        </div>
-    </section>
+        <img src="pe.jpeg" alt="Montes Developers Divulgação" class="hero-img">
+    </picture>
+    
+    <div class="hero-overlay">
+        <a href="#sistemas" class="btn btn-solid">Conhecer Sistemas</a>
+    </div>
+</section>
 
     <section id="sobre">
         <h2 class="section-title">Soluções <span>Digitais</span></h2>
