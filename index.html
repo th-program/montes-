@@ -27,7 +27,7 @@
             background-color: var(--bg-dark);
             color: var(--text-light);
             line-height: 1.6;
-            overflow-x: hidden; /* Evita rolagem horizontal indesejada */
+            overflow-x: hidden;
         }
 
         a {
@@ -96,42 +96,43 @@
             color: var(--primary-cyan);
         }
 
-        /* --- DEMAIS SEÇÕES (REGRAS GERAIS) --- */
         section {
             padding: 5rem 5%;
         }
 
-        /* --- HERO BANNER (REGRAS ESPECÍFICAS) --- */
+        /* --- HERO BANNER --- */
         section.hero-banner {
-            margin-top: 72px; /* Espaço exato do header */
-            padding: 0; /* Remove as bordas/espaçamentos laterais e de topo */
+            margin-top: 72px;
+            padding: 0;
             width: 100%;
             position: relative;
             display: flex;
             flex-direction: column;
+            background-color: var(--bg-dark);
         }
 
         .hero-img {
             width: 100%;
-            height: auto;
+            max-width: 1400px; /* Evita esticar demais em monitores ultrawide */
+            margin: 0 auto; /* Centraliza a imagem no PC */
+            height: auto; /* Mantém a proporção real sem cortar */
             display: block;
-            object-fit: cover;
+            /* object-fit: cover removido para evitar o corte no PC */
         }
 
         .hero-overlay {
             width: 100%;
             padding: 2rem 0;
             display: flex;
-            justify-content: center; /* Centraliza o botão perfeitamente */
+            justify-content: center;
             align-items: center;
             background-color: var(--bg-dark);
         }
 
-        /* --- NOVO BOTÃO CHAMATIVO --- */
         .btn-chamativo {
             display: inline-block;
             width: 90%;
-            max-width: 450px; /* Limita o tamanho no PC para não ficar esticado */
+            max-width: 450px;
             background: linear-gradient(90deg, var(--primary-blue), var(--primary-cyan));
             color: #ffffff;
             padding: 1.2rem 2rem;
@@ -144,14 +145,14 @@
             border: none;
             box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4);
             transition: all 0.3s ease;
-            animation: pulse 2s infinite; /* Efeito de pulso para chamar atenção */
+            animation: pulse 2s infinite;
             cursor: pointer;
         }
 
         .btn-chamativo:hover {
             transform: translateY(-3px) scale(1.02);
             box-shadow: 0 6px 25px rgba(0, 212, 255, 0.7);
-            animation: none; /* Pausa o pulso ao passar o mouse */
+            animation: none;
             color: #ffffff;
         }
 
@@ -161,7 +162,6 @@
             100% { box-shadow: 0 0 0 0 rgba(0, 212, 255, 0); }
         }
 
-        /* --- BOTÕES PADRÕES --- */
         .btn {
             display: inline-block;
             max-width: 100%;
@@ -194,12 +194,6 @@
             box-shadow: 0 0 15px var(--primary-cyan);
         }
 
-        .btn-solid {
-            background-color: var(--primary-cyan);
-            color: var(--bg-dark);
-        }
-
-        /* --- ESTILOS DAS SEÇÕES --- */
         .section-title {
             text-align: center;
             font-size: 2rem;
@@ -311,13 +305,101 @@
             padding: 3rem 2rem;
             border-radius: 8px;
             border: 1px solid var(--border-color);
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
-        .contact-container p {
+        .contact-container > p {
             margin-bottom: 2rem;
             color: var(--text-muted);
+        }
+
+        /* --- ATENDENTES WHATSAPP --- */
+        .whatsapp-options {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .attendant-card {
+            background-color: rgba(5, 11, 20, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem 1.5rem;
+            width: 100%;
+            max-width: 300px;
+            transition: all 0.3s ease;
+        }
+
+        .attendant-card:hover {
+            border-color: #25D366; /* Verde WhatsApp */
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.1);
+        }
+
+        /* Aqui você colocará as imagens de avatar depois */
+        .avatar-placeholder {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1e293b, #0f1626);
+            border: 2px dashed var(--primary-cyan);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            /* Instrução de como colocar a imagem no futuro:
+               Remova o background e o border dashed acima, e insira:
+               background-image: url('sua-imagem-sem-fundo.png');
+               background-size: cover;
+               background-position: center;
+               border: 2px solid var(--primary-cyan);
+            */
+        }
+
+        .attendant-card h3 {
+            color: var(--text-light);
+            font-size: 1.3rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .attendant-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Botão saltitante do WhatsApp */
+        .btn-whatsapp {
+            display: inline-block;
+            background-color: #25D366;
+            color: #ffffff;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            border: none;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            animation: bounce 2s infinite; /* Chamada da animação */
+            transition: all 0.3s ease;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #128C7E;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+            animation: none; /* Pausa o pulo ao focar com o mouse */
+            transform: scale(1.05);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-12px); }
+            60% { transform: translateY(-6px); }
         }
 
         footer {
@@ -361,10 +443,8 @@
             .hero-overlay {
                 position: relative;
                 background: var(--bg-dark);
-                padding: 2rem 0 3rem; /* Espaço extra embaixo no celular */
-                margin-top: -5px; /* Remove frestas entre a imagem e a área do botão */
-                display: flex;
-                justify-content: center;
+                padding: 2rem 0 3rem;
+                margin-top: -5px;
             }
         }
     </style>
@@ -456,8 +536,24 @@
     <section id="contato">
         <h2 class="section-title">Faça um <span>Orçamento</span></h2>
         <div class="contact-container">
-            <p>Excelência em desenvolvimento web. Entre em contato para um orçamento personalizado, focado em performance e resultados para o seu negócio.</p>
-            <a href="https://wa.me/SEU_NUMERO_AQUI" target="_blank" class="btn btn-solid">Falar no WhatsApp</a>
+            <p>Excelência em desenvolvimento web. Escolha abaixo com quem deseja falar e entre em contato para um orçamento personalizado.</p>
+            
+            <div class="whatsapp-options">
+                <div class="attendant-card">
+                    <div class="avatar-placeholder">👨‍💻</div>
+                    <h3>Saulo</h3>
+                    <p>Especialista de Vendas</p>
+                    <a href="https://wa.me/SEU_NUMERO_SAULO_AQUI" target="_blank" class="btn-whatsapp">Falar com Saulo</a>
+                </div>
+
+                <div class="attendant-card">
+                    <div class="avatar-placeholder">👨‍💻</div>
+                    <h3>Arthur</h3>
+                    <p>Suporte e Orçamentos</p>
+                    <a href="https://wa.me/SEU_NUMERO_ARTHUR_AQUI" target="_blank" class="btn-whatsapp">Falar com Arthur</a>
+                </div>
+            </div>
+
         </div>
     </section>
 
